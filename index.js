@@ -67,7 +67,7 @@ const test = (d, option) => {
                 });
                 spinner.stop();
                 spinnerNpm = ora().start('installing Phaser');
-                const cmd = `cd ./${d} && npm init -y && npm install --save phaser watch-http-server`;
+                const cmd = `cd ./${d} && npm init -y && npm install --save phaser`;
                 exec(cmd, function(error, stdout, stderr) {
                     console.log("stderr: ", stdout);
                     exec('npm install -g watch-http-server', function() {
@@ -117,7 +117,7 @@ const test = (d, option) => {
 }
 
 program
-    .version('0.4.0')
+    .version('0.4.1')
     .option('-n, --new', 'Create a new proyect')
     .option('-s, --scene', 'Create a new scene')
     .option('-S, --server', 'Create the server')
