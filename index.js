@@ -70,8 +70,10 @@ const test = (d, option) => {
                 const cmd = `cd ./${d} && npm init -y && npm install --save phaser watch-http-server`;
                 exec(cmd, function(error, stdout, stderr) {
                     console.log("stderr: ", stdout);
-                    spinnerNpm.succeed('Phaser installed');
-                    spinnerNpm.stop();
+                    exec('npm install -g watch-http-server', function() {
+                        spinnerNpm.succeed('Phaser installed');
+                        spinnerNpm.stop();
+                    });
                 });
             }
 
@@ -115,9 +117,9 @@ const test = (d, option) => {
 }
 
 program
-    .version('0.3.0')
-    .option('-n, --new', 'Crear nuevo proyecto')
-    .option('-s, --scene', 'Crear nuevo proyecto')
-    .option('-S, --server', 'Crea el servidor')
+    .version('0.4.0')
+    .option('-n, --new', 'Create a new proyect')
+    .option('-s, --scene', 'Create a new scene')
+    .option('-S, --server', 'Create the server')
     .action(test)
     .parse(process.argv);
