@@ -1,7 +1,7 @@
 {
   "name": "phaser3-cli-gamma",
-  "version": "0.0.2",
-  "description": "Phaser 3 cli - Una interfaz e linea de comandos simple para Phaser 3",
+  "version": "0.3.0",
+  "description": "Phaser 3 cli - Una interfaz de linea de comandos simple para Phaser 3",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

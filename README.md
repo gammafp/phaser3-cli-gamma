@@ -1,5 +1,5 @@
 # phaser3-cli-gamma
-Phaser 3 cli - Una interfaz e linea de comandos simple para Phaser 3
+Phaser 3 cli - Una interfaz de linea de comandos simple para Phaser 3
 
 Instalación: 
 ```npm install -g phaser3-cli-gamma```
