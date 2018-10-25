@@ -1,0 +1,20 @@
+{
+  "name": "phaser3-cli-gamma",
+  "version": "0.0.1",
+  "description": "Phaser 3 cli - Una interfaz e linea de comandos simple para Phaser 3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bin": {
+    "pg": "./index.js"
+  },
+  "dependencies": {
+    "commander": "^2.19.0",
+    "inquirer": "^6.2.0",
+    "ora": "^3.0.0"
+  }
+}
