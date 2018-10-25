@@ -9,11 +9,11 @@ const validNumber = (value) => {
 module.exports = [{
     type: 'input',
     name: 'title',
-    message: 'Enter the games name'
+    message: 'Enter the name of the game'
 }, {
     type: 'list',
     name: 'type',
-    message: 'Select your type?',
+    message: 'Select type of canvas?',
     choices: [
       'Phaser.AUTO',
       'Phaser.CANVAS',
@@ -22,17 +22,17 @@ module.exports = [{
   }, {
     type: 'input',
     name: 'width',
-    message: 'width of proyect', 
+    message: 'width of project', 
     validate: validNumber
 }, {
     type: 'input',
     name: 'height',
-    message: 'heigth of proyect',
+    message: 'heigth of project',
     validate: validNumber
 }, {
     type: 'list',
     name: 'pixelArt',
-    message: 'Is a pixel art game?',
+    message: 'Is it a pixel art game?',
     choices: [
       'true',
       'false'
