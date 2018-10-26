@@ -26,7 +26,6 @@ const index = (x) => {
             }
             #container {
                 margin-top: 100px;
-                transform: scale(2);
             }
         </style>
     </head>
@@ -42,12 +41,15 @@ const index = (x) => {
 };
 
 const main = (x) => {
+    const colors = ["#c7ecee", "#f9ca24", "#22a6b3", "#4834d4", "#95afc0", "#e67e22", "#ffffff"];
+    const backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    
     let configJSON = {
         "title": x.title,
         "width": parseInt(x.width),
         "height": parseInt(x.height),
         "parent": 'container',
-        "backgroundColor": '#eeeeee',
+        "backgroundColor": backgroundColor,
         "pixelArt": JSON.parse(x.pixelArt),
         "physics": (JSON.parse(x.physics)) ? {
             "default": "arcade",

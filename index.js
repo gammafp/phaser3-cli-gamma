@@ -117,7 +117,7 @@ const test = (d, option) => {
 }
 
 program
-    .version('0.4.5')
+    .version('0.4.6')
     .option('-n, --new', 'Create a new proyect')
     .option('-s, --scene', 'Create a new scene')
     .action(test)
