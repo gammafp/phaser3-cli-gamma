@@ -79,7 +79,8 @@ const test = (d, option) => {
     }
 
     if (program.scene) {
-        if (typeof (program.args[0]) === 'undefined') {
+        const argumentos = Array.from(program.args).filter((x, i, arr) => i != arr.length-1);
+        if (argumentos.length === 0) {
             console.log("El campo está vacío");
         } else {
             const spinner = ora().start('Creating scene ${fileName}');
