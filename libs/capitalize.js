@@ -1,0 +1,1 @@
+module.exports = (x) => (x.trim(), x.charAt(0).toUpperCase() + x.slice(1));

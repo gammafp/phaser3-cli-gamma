@@ -66,7 +66,7 @@ const main = (x) => {
     configJSON = JSON.stringify(configJSON, null, '    ');
 
     let mainJS = `import Bootloader from './Bootloader.js';
-                
+
 const config = ${configJSON};
 
 new Phaser.Game(config);`;
@@ -134,10 +134,23 @@ export default ${x};
 `;
 }
 
+const editorconfig = () => {
+    return `root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = crlf
+charset = utf-8
+trim_trailing_whitespace = false
+insert_final_newline = false`;
+}
+
 module.exports = {
     main,
     bootloader,
     index,
     logo_gamma,
-    sceneTemplate
+    sceneTemplate,
+    editorconfig
 }
