@@ -41,14 +41,12 @@ const test = (d, option) => {
                     }
                 }
                 // Files
-
-
                 fs.writeFile(`./${d}/index.html`, scaffolding.index(x), function (err) {
                     if (err) throw err;
                     spinner.succeed('Saved index.js!');
                 });
 
-                // Main            
+                // Main        
                 fs.writeFile(`./${d}/${dirSrc}/main.js`, scaffolding.main(x), function (err) {
                     if (err) throw err;
                     spinner.succeed('Saved main.js!');
@@ -117,7 +115,7 @@ const test = (d, option) => {
 }
 
 program
-    .version('0.4.6')
+    .version('0.4.8')
     .option('-n, --new', 'Create a new proyect')
     .option('-s, --scene', 'Create a new scene')
     .action(test)

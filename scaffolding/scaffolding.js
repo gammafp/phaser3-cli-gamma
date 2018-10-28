@@ -48,6 +48,7 @@ const main = (x) => {
         "title": x.title,
         "width": parseInt(x.width),
         "height": parseInt(x.height),
+        "type": x.type,
         "parent": 'container',
         "backgroundColor": backgroundColor,
         "pixelArt": JSON.parse(x.pixelArt),
@@ -73,6 +74,10 @@ new Phaser.Game(config);`;
     return mainJS.replace('"Bootloader"', 'Bootloader')
         .replace('"title"', 'title')
         .replace('"width"', 'width')
+        .replace('"type"', 'type')
+        .replace('"Phaser.AUTO"', 'Phaser.AUTO')
+        .replace('"Phaser.WEBGL"', 'Phaser.WEBGL')
+        .replace('"Phaser.CANVAS"', 'Phaser.CANVAS')
         .replace('"height"', 'height')
         .replace('"parent"', 'parent')
         .replace('"backgroundColor"', 'backgroundColor')
