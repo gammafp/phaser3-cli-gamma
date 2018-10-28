@@ -113,9 +113,11 @@ const test = (d, option) => {
                     let preScene = datos.split('scene: [')[1].split("]")[0];
                     let scene = preScene.replace(/\r?\n|\r/g, '').trim();
                     let newScenes = `${scene}, ${argumentos.map((x) => libs.capitalize(x)).join(", ")}`;
+                    
                     let oldImports = datos.match(/^import ([a-zA-Z])* ([a-zA-Z])* (['|"])([.\/a-zA-Z0-9])*(['|"]);/gm).join("\n");
+                    
                     let newImports = argumentos.reduce((prev, current) => `${prev}import ${libs.capitalize(current)} from './scenes/${libs.capitalize(current)}.js';\n`, '');
-                    let output = oldImports + '\n' + newImports + datos.replace(preScene, newScenes).replace(oldImports, '');
+                    let output = newImports + datos.replace(preScene, newScenes);
                     output = output.replace(/\n{2,}/g, '\n\n');
 
                     // Main            
@@ -154,7 +156,7 @@ const test = (d, option) => {
 }
 
 program
-    .version('0.4.9')
+    .version('0.5.0')
     .option('-n, --new', 'Create a new proyect')
     .option('-s, --scene', 'Create a new scene')
     .option('-t, --test', 'Test')
