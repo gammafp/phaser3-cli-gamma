@@ -110,15 +110,8 @@ const test = (d, option) => {
 
                     // Separar y agregar escenas en el array de escenas
                     let datos = data.toString();
-                    let preScene = datos.split('scene: [')[1].split("]")[0];
-                    let scene = preScene.replace(/\r?\n|\r/g, '').trim();
-                    let newScenes = `${scene}, ${argumentos.map((x) => libs.capitalize(x)).join(", ")}`;
-                    
-                    let oldImports = datos.match(/^import ([a-zA-Z])* ([a-zA-Z])* (['|"])([.\/a-zA-Z0-9])*(['|"]);/gm).join("\n");
-                    
-                    let newImports = argumentos.reduce((prev, current) => `${prev}import ${libs.capitalize(current)} from './scenes/${libs.capitalize(current)}.js';\n`, '');
-                    let output = newImports + datos.replace(preScene, newScenes);
-                    output = output.replace(/\n{2,}/g, '\n\n');
+                    const datosEntrada = argumentos.map((x) => libs.capitalize(x));
+                    const output = libs.getScenes(datos, datosEntrada);                
 
                     // Main            
                     fs.writeFile(`${dirSrc}/main.js`, output, function (err) {
@@ -137,6 +130,7 @@ const test = (d, option) => {
                             spinner.stop();
                         });
                     });
+
                 });
             }
         }
@@ -156,7 +150,7 @@ const test = (d, option) => {
 }
 
 program
-    .version('0.5.0')
+    .version('0.5.1')
     .option('-n, --new', 'Create a new proyect')
     .option('-s, --scene', 'Create a new scene')
     .option('-t, --test', 'Test')
