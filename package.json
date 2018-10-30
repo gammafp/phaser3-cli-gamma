@@ -1,6 +1,6 @@
 {
   "name": "phaser3-cli-gamma",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Phaser 3 cli - Una interfaz de linea de comandos simple para Phaser 3",
   "main": "index.js",
   "scripts": {
@@ -13,11 +13,19 @@
     "javascript",
     "gammafp"
   ],
-  "author": "",
+  "author": "Gammafp",
   "license": "ISC",
   "bin": {
     "pg": "./index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gammafp/phaser3-cli-gamma"
+  },
+  "bugs": {
+    "url": "https://github.com/gammafp/phaser3-cli-gamma/issue"
+  },
+  "homepage": "https://github.com/gammafp/phaser3-cli-gamma#readme",
   "dependencies": {
     "commander": "^2.19.0",
     "inquirer": "^6.2.0",
