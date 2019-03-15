@@ -7,6 +7,7 @@ const {
 } = require('inquirer');
 const ora = require('ora');
 
+const https = require('https');
 const exec = require('child_process').exec;
 const scaffolding = require('./scaffolding/scaffolding');
 const libs = require('./libs/libs');
@@ -25,7 +26,7 @@ const test = (d, option) => {
     if (program.new) {
         const folderName = (argumentos.length === 0) ? 'Phaser3_Gammafp' : argumentos[0];
 
-        prompt(qNewProject).then((x) => {
+        prompt(qNewProject).then((respuestas) => {
             // Index
             let spinner = ora().start('Creating Project');
             // Folder structure
@@ -48,13 +49,13 @@ const test = (d, option) => {
                     }
                 }
                 // Files
-                fs.writeFile(`./${folderName}/index.html`, scaffolding.index(x), function (err) {
+                fs.writeFile(`./${folderName}/index.html`, scaffolding.index(respuestas), function (err) {
                     if (err) throw err;
                     spinner.succeed('Saved index.js!');
                 });
 
                 // Main        
-                fs.writeFile(`./${folderName}/${dirSrc}/main.js`, scaffolding.main(x), function (err) {
+                fs.writeFile(`./${folderName}/${dirSrc}/main.js`, scaffolding.main(respuestas), function (err) {
                     if (err) throw err;
                     spinner.succeed('Saved main.js!');
                 });
@@ -68,7 +69,7 @@ const test = (d, option) => {
                 // Image logo
                 fs.writeFile(`./${folderName}/${dirAssets}/logo_gamma.png`, scaffolding.logo_gamma(), 'base64', function (err) {
                     if (err) throw err;
-                    spinner.succeed('Saved asset.js!\n');
+                    spinner.succeed('Saved assets!\n');
                 });
 
                 // Creador de .editorconfig
@@ -84,20 +85,42 @@ const test = (d, option) => {
 
                 spinner.stop();
 
-                // Instalar Phaser por npm
-                spinnerNpm = ora().start('installing Phaser\n');
+                const spinnerDefinitions = ora().start('Donwload Phaser definitions\n');
+                // Descargar definiciones de Phaser
+                if (respuestas.definitions === 'Yes') {
+                    // Descargamos las definiciones
+                    fs.writeFile(`./${folderName}/index.html`, scaffolding.index(respuestas), function (err) {
+                        if (err) throw err;
+                        spinner.succeed('Saved index.js!');
+                    });
+
+                    fs.mkdirSync(`./${folderName}/def`);
+                    const phaserDef = fs.createWriteStream(`${folderName}/def/phaser.d.ts`);
+
+                    https.get('https://raw.githubusercontent.com/photonstorm/phaser3-docs/master/typescript/phaser.d.ts', function(response) {
+                        response.pipe(phaserDef);
+                        spinnerDefinitions.stop();
+                    });
+
+                    // Iniciamos el jsonconfig.json
+                    fs.writeFile(`${folderName}/jsconfig.json`, '{}', (err) => console.log(err) );
+                    spinnerDefinitions.succeed('Phaser definitions OK');
+                    spinnerDefinitions.stop();
+                }
+
+                // Instalar Phaser por npm FINAL
+                const spinnerPhaserInstall = ora().start('installing Phaser\n');
                 const cmd = `cd ./${folderName} && npm init -y && npm install --save phaser`;
                 exec(cmd, function (error, stdout, stderr) {
-                    console.log("stderr: ", stdout);
-                    // exec('npm install -g watch-http-server', function() {
-                    // });
-                    spinnerNpm.succeed('Phaser installed');
-                    spinnerNpm.stop();
+                    // console.log("stderr: ", stdout);
+                    spinnerPhaserInstall.succeed('Phaser installed');
+                    spinnerPhaserInstall.stop();
                 });
+
             }
 
         });
-    } 
+    }
     // Comprobar si es un proyecto de Phaser 3 gammafp
     else if (fs.existsSync('./.gamma')) {
         if (program.scene) {
@@ -111,7 +134,7 @@ const test = (d, option) => {
                     // Separar y agregar escenas en el array de escenas
                     let datos = data.toString();
                     const datosEntrada = argumentos.map((x) => libs.capitalize(x));
-                    const output = libs.getScenes(datos, datosEntrada);                
+                    const output = libs.getScenes(datos, datosEntrada);
 
                     // Main            
                     fs.writeFile(`${dirSrc}/main.js`, output, function (err) {
@@ -135,11 +158,6 @@ const test = (d, option) => {
             }
         }
 
-        if (program.server) {
-            const cmd = `watch-http-server -a 127.0.0.1 -p 8082 -o -c-1`;
-            exec(cmd);
-            console.log("Server started at: http://localhost:8082");
-        }
     } else {
         console.log('Sorry, there are no Phaser 3 Projects made with Phaser 3 CLI gammafp in this directory.');
     }
@@ -150,9 +168,10 @@ const test = (d, option) => {
 }
 
 program
-    .version('0.5.2')
+    .version('1.0.0')
     .option('-n, --new', 'Create a new proyect')
     .option('-s, --scene', 'Create a new scene')
     .option('-t, --test', 'Test')
+    .option('-d, --definitions', 'Download and configure Phaser definitions')
     .action(test)
     .parse(process.argv);

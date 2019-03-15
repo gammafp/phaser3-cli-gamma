@@ -1,16 +1,16 @@
 const validNumber = (value) => {
-    let pass = value.match(/^[0-9]*$/);
-    if(pass && value != '' && value != ' ') {
-        return true;
-    }
-    return 'Please enter a number';
+  let pass = value.match(/^[0-9]*$/);
+  if (pass && value != '' && value != ' ') {
+    return true;
+  }
+  return 'Please enter a number';
 }
 
 module.exports = [{
     type: 'input',
     name: 'title',
     message: 'Enter the name of the game'
-}, {
+  }, {
     type: 'list',
     name: 'type',
     message: 'Select type of canvas?',
@@ -19,17 +19,27 @@ module.exports = [{
       'Phaser.CANVAS',
       'Phaser.WEBGL'
     ]
-  }, {
+  },
+  {
+    type: 'list',
+    name: 'definitions',
+    message: 'Do you want download Phaser definitions?',
+    choices: [
+      'Yes',
+      'No'
+    ]
+  },
+  {
     type: 'input',
     name: 'width',
-    message: 'width of project', 
+    message: 'width of project',
     validate: validNumber
-}, {
+  }, {
     type: 'input',
     name: 'height',
     message: 'heigth of project',
     validate: validNumber
-}, {
+  }, {
     type: 'list',
     name: 'pixelArt',
     message: 'Is it a pixel art game?',
@@ -47,4 +57,3 @@ module.exports = [{
     ]
   }
 ];
-

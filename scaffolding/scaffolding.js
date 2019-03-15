@@ -46,6 +46,7 @@ const main = (x) => {
     
     let configJSON = {
         "title": x.title,
+        "version": 'v0.0.1',
         "width": parseInt(x.width),
         "height": parseInt(x.height),
         "type": x.type,
@@ -74,6 +75,7 @@ new Phaser.Game(config);`;
     return mainJS.replace('"Bootloader"', 'Bootloader')
         .replace('"title"', 'title')
         .replace('"width"', 'width')
+        .replace('"version"', 'version')
         .replace('"type"', 'type')
         .replace('"Phaser.AUTO"', 'Phaser.AUTO')
         .replace('"Phaser.WEBGL"', 'Phaser.WEBGL')
@@ -96,7 +98,7 @@ const bootloader = () => {
     }
 
     preload() {
-        console.log('Bootloader :D');
+        console.log('Bootloader');
         this.load.path = './assets/';
 
         this.load.image('logo_gamma', 'logo_gamma.png');
@@ -119,10 +121,6 @@ class ${x} extends Phaser.Scene {
     
     preload() {
         console.log('Scene: ${x}');
-    }
-
-    create() {
-        
     }
 
     update() {
