@@ -46,7 +46,7 @@ const main = (x) => {
     
     let configJSON = {
         "title": x.title,
-        "version": 'v0.0.1',
+        "version": '0.0.1',
         "width": parseInt(x.width),
         "height": parseInt(x.height),
         "type": x.type,
@@ -102,6 +102,10 @@ const bootloader = () => {
         this.load.path = './assets/';
 
         this.load.image('logo_gamma', 'logo_gamma.png');
+
+        this.load.on('complete', () => {
+            console.log('Load complete');
+        });
     }
 
     create() {
@@ -119,11 +123,11 @@ class ${x} extends Phaser.Scene {
         super({key: '${x}'});
     }
     
-    preload() {
+    create() {
         console.log('Scene: ${x}');
     }
 
-    update() {
+    update(time, delta) {
 
     }
 }
