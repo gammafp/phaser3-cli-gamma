@@ -2,6 +2,8 @@
 
 Phaser 3 cli - A simple command prompt interface for Phaser 3
 
+#### (new) You can download phaser definitions 
+
 - Installation: 
 ```npm install -g phaser3-cli-gamma```
 
@@ -24,6 +26,8 @@ Phaser 3 cli - A simple command prompt interface for Phaser 3
 
 ## Español: 
 Phaser 3 cli - Una interfaz de linea de comandos simple para Phaser 3
+
+#### (Nuevo) Ahora puedes descargar Phaser definitions.
 
 - Instalación: 
 ```npm install -g phaser3-cli-gamma```

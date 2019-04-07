@@ -8,7 +8,7 @@ const logo_gamma = () => {
 }
 const index = (x) => {
     return `<!DOCTYPE html>
-    <html lang="en">
+    <html lang="es">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,18 +20,13 @@ const index = (x) => {
                 padding: 0px;
             }
             body {
-                display: flex;
-                justify-content: center;
                 background-color: #2c3e50;
-            }
-            #container {
-                margin-top: 100px;
             }
         </style>
     </head>
     <body>
         
-        <div id="container">
+        <div id="phaser_container">
             
         </div>
         <script src="./node_modules/phaser/dist/phaser.min.js"></script>
@@ -47,10 +42,14 @@ const main = (x) => {
     let configJSON = {
         "title": x.title,
         "version": '0.0.1',
-        "width": parseInt(x.width),
-        "height": parseInt(x.height),
         "type": x.type,
-        "parent": 'container',
+        "scale": {
+            "parent": 'phaser_container',
+            "width": parseInt(x.width),
+            "height": parseInt(x.height),
+            "mode": "Phaser.Scale.FIT",
+            "autoCenter": "Phaser.Scale.CENTER_BOTH"
+        },
         "backgroundColor": backgroundColor,
         "pixelArt": JSON.parse(x.pixelArt),
         "physics": (JSON.parse(x.physics)) ? {
@@ -80,6 +79,11 @@ new Phaser.Game(config);`;
         .replace('"Phaser.AUTO"', 'Phaser.AUTO')
         .replace('"Phaser.WEBGL"', 'Phaser.WEBGL')
         .replace('"Phaser.CANVAS"', 'Phaser.CANVAS')
+        .replace('"scale"', 'scale')
+        .replace('"mode"', 'mode')
+        .replace('"Phaser.Scale.FIT"', 'Phaser.Scale.FIT')
+        .replace('"autoCenter"', 'autoCenter')
+        .replace('"Phaser.Scale.CENTER_BOTH"', 'Phaser.Scale.CENTER_BOTH')
         .replace('"height"', 'height')
         .replace('"parent"', 'parent')
         .replace('"backgroundColor"', 'backgroundColor')
@@ -122,9 +126,13 @@ class ${x} extends Phaser.Scene {
     constructor() {
         super({key: '${x}'});
     }
-    
-    create() {
+
+    init() {
         console.log('Scene: ${x}');
+    }
+
+    create() {
+
     }
 
     update(time, delta) {
