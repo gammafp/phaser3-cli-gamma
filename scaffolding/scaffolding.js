@@ -103,7 +103,7 @@ const bootloader = () => {
 
     preload() {
         console.log('Bootloader');
-        this.load.path = './assets/';
+        this.load.setPath('./assets/');
 
         this.load.image('logo_gamma', 'logo_gamma.png');
 
@@ -113,7 +113,7 @@ const bootloader = () => {
     }
 
     create() {
-        this.add.image(this.sys.game.config.width/2, this.sys.game.config.height/2, 'logo_gamma');
+        this.add.image(this.scale.width / 2, this.scale.height / 2, 'logo_gamma');
     }
 }
 export default Bootloader;`
